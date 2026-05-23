@@ -1,4 +1,10 @@
-/* Force any inline image (incl. emoji rendered as SVG) to stay inline-sized. */
+/* ---------------------------------------------------------------------------
+ * Defensive CSS to keep the site readable even when Material's webfont icons
+ * fail to load (common in restricted networks). All inline images, SVGs, and
+ * pseudo-element icons are clamped so nothing renders oversized.
+ * --------------------------------------------------------------------------- */
+
+/* Any inline image / svg / emoji image stays inline-sized */
 .md-typeset img,
 .md-typeset svg,
 .md-typeset .twemoji,
@@ -9,17 +15,49 @@
   display: inline-block;
 }
 
-/* Constrain emoji-font characters that some OS fonts render oversized. */
-.md-typeset {
-  font-variant-emoji: text;
+/* If Material's icon webfont fails to load, the placeholder ::before glyph in
+ * admonitions / nav / TOC can balloon. Cap their size. */
+.md-typeset .md-icon::before,
+.md-typeset [class*="md-icon"]::before,
+.md-nav__icon,
+.md-icon {
+  font-size: 1em !important;
+  line-height: 1 !important;
+  width: 1em;
+  height: 1em;
 }
 
-/* Keep tables readable on small viewports. */
+/* Heading permalink (.headerlink) only appears on hover; belt-and-suspenders
+ * keep it small even on touch devices that show :hover state. */
+.md-typeset .headerlink {
+  font-size: 0.85em !important;
+  margin-left: 0.25em;
+  opacity: 0.4;
+}
+
+/* Make tables more readable on narrow viewports */
 .md-typeset table:not([class]) {
   font-size: 0.85rem;
 }
 
-/* Trim default header icon padding that some themes inflate. */
+/* Header weight without webfont fallback */
 .md-header__title {
   font-weight: 600;
+}
+
+/* Force emoji characters to use text-style rendering (smaller, monochrome)
+ * instead of color-emoji fonts that some platforms render at ~1.5em */
+.md-typeset {
+  font-variant-emoji: text;
+}
+
+/* Hide the pilcrow / link symbol that some Material versions inject next to
+ * headings even with toc.permalink disabled */
+.md-typeset h1 .headerlink::before,
+.md-typeset h2 .headerlink::before,
+.md-typeset h3 .headerlink::before,
+.md-typeset h4 .headerlink::before,
+.md-typeset h5 .headerlink::before,
+.md-typeset h6 .headerlink::before {
+  content: "" !important;
 }

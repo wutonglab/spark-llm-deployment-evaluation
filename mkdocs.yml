@@ -9,21 +9,9 @@ theme:
   name: material
   features:
     - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
-    - navigation.expand
-    - navigation.indexes
     - navigation.top
-    - navigation.footer
-    - navigation.path
-    - search.suggest
-    - search.highlight
-    - search.share
     - content.code.copy
-    - content.code.annotate
-    - content.action.edit
-    - content.action.view
-    - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -39,13 +27,11 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-  font:
-    text: Inter
-    code: JetBrains Mono
-  icon:
-    repo: fontawesome/brands/github
-    edit: material/pencil
-    view: material/eye
+  # font: false intentionally — do NOT load Google Fonts. Many users (e.g. in
+  # mainland China) can't reach fonts.googleapis.com, which forces every icon /
+  # ¶ permalink / Material symbol to fall back to a system glyph that renders
+  # oversized. System fonts everywhere → consistent on every network.
+  font: false
 
 plugins:
   - search
@@ -62,25 +48,20 @@ markdown_extensions:
   - def_list
   - abbr
   - pymdownx.details
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
+      anchor_linenums: false
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.tasklist:
       custom_checkbox: true
-  # pymdownx.emoji intentionally disabled — we don't want :shortcode: turned into
-  # large SVG images; unicode emoji in markdown render as plain text characters.
   - toc:
-      permalink: true
+      # permalink intentionally disabled — the ¶ pilcrow next to every heading
+      # depends on the Material icon webfont; if the font fails to load, ¶
+      # falls back to a giant glyph in system fonts. Plain headings only.
       toc_depth: 3
 
 hooks:
@@ -110,7 +91,3 @@ nav:
 
 extra:
   generator: false
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/wutonglab/spark-llm-deployment-evaluation
-      name: GitHub

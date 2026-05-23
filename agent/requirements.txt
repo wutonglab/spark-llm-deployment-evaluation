@@ -1,0 +1,9 @@
+# Multi-provider LLM agent dependencies
+# Intentionally minimal — no LangChain / CrewAI / etc.
+openai>=1.50.0
+anthropic>=0.40.0
+pydantic>=2.5.0
+rich>=13.5.0
+python-dotenv>=1.0.0
+paramiko>=3.4.0          # optional SSH for remote benchmark
+httpx>=0.27.0

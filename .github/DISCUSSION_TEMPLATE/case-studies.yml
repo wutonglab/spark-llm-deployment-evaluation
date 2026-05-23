@@ -1,0 +1,26 @@
+title: "[case] "
+labels: ["case-study"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share a measurement or comparison you've run. Even partial cases or pure data-point contributions are welcome — they don't need to be full case studies.
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup
+      description: Model, hardware (sanitized), inference engine + version
+    validations:
+      required: true
+  - type: textarea
+    id: measurements
+    attributes:
+      label: Measurements
+      description: Throughput / latency numbers + the config that produced them
+    validations:
+      required: true
+  - type: textarea
+    id: framework-comparison
+    attributes:
+      label: How does this compare to framework predictions?
+      description: Which framework would have predicted this, and how close was the prediction?

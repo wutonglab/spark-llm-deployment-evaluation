@@ -1,0 +1,56 @@
+name: Case study submission
+description: Track a new case study you're running or have completed
+title: "[case] <model-id> on <hardware-id>"
+labels: ["case-study"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this to claim a case study (so multiple people don't duplicate work), or to announce a completed case study and request review.
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: HuggingFace repo id
+      placeholder: "Qwen/Qwen3.6-35B-A3B-FP8"
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Target hardware
+      description: Sanitized hardware string (no internal hostnames or IPs)
+      placeholder: "DGX Spark / GB10 / 128GB / 273 GB/s LPDDR5X / sm_121"
+    validations:
+      required: true
+  - type: input
+    id: scenario
+    attributes:
+      label: Business scenario (high-level description, no customer info)
+      placeholder: "general LLM API service" or "code agent with tool calling"
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - "claiming - I'll run this case in the next 2 weeks"
+        - "in-progress - measurements underway"
+        - "ready-for-review - PR open"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / questions
+      description: Any context, blockers, or specific framework questions
+  - type: checkboxes
+    id: sanitization
+    attributes:
+      label: Sanitization commitment
+      options:
+        - label: I will not include proprietary, internal, or NDA-bound information
+          required: true
+        - label: I will run `bash scripts/check-no-internal.sh` before submitting the PR
+          required: true

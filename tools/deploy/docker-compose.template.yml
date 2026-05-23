@@ -1,0 +1,61 @@
+version: "3.9"
+
+# Generic vLLM deployment template. Operators copy this to docker-compose.yml
+# and customize via the .env file (cp .env.example ../../.env at repo root).
+#
+# All variant-specific knobs are env-driven so this template works across the
+# case studies in this repo.
+
+services:
+  vllm:
+    image: ${VLLM_IMAGE:-nvcr.io/nvidia/vllm:26.03.post1-py3}
+    container_name: ${CONTAINER_NAME:-vllm}
+    restart: unless-stopped
+    ipc: host
+    runtime: nvidia
+    environment:
+      VLLM_MARLIN_USE_ATOMIC_ADD: "1"
+    ports:
+      - "${VLLM_PORT:-8000}:8000"
+    volumes:
+      - ${MODEL_DIR}:/model:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    entrypoint: ["python3"]
+    command:
+      - -m
+      - vllm.entrypoints.openai.api_server
+      - --model
+      - /model
+      - --served-model-name
+      - ${MODEL_ID}
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --tensor-parallel-size
+      - "1"
+      - --max-model-len
+      - "${MAX_MODEL_LEN:-262144}"
+      - --max-num-batched-tokens
+      - "${MAX_NUM_BATCHED_TOKENS:-16384}"
+      - --gpu-memory-utilization
+      - "${GPU_MEM_UTIL:-0.85}"
+      - --reasoning-parser
+      - "qwen3"
+      - --enable-auto-tool-choice
+      - --tool-call-parser
+      - "qwen3_xml"
+      - --dtype
+      - auto
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/v1/models"]
+      interval: 30s
+      timeout: 5s
+      retries: 10
+      start_period: 5m

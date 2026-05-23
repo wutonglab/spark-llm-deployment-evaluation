@@ -1,0 +1,61 @@
+{
+  "tools": [
+    {
+      "name": "run_shell",
+      "description": "Execute a shell command locally (or via SSH to target host if --target-host was set). Use for benchmarks, environment checks, container ops. Bounded by timeout.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": {"type": "string", "description": "The shell command to run."},
+          "timeout": {"type": "integer", "default": 600, "description": "Timeout in seconds."}
+        },
+        "required": ["command"]
+      }
+    },
+    {
+      "name": "http_get",
+      "description": "Fetch a URL and return its body (truncated to 1 MiB). Use for HuggingFace model cards, vLLM docs, GitHub issue pages, blog posts, leaderboard pages.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {"type": "string"},
+          "timeout": {"type": "integer", "default": 30}
+        },
+        "required": ["url"]
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Read a local file from this repository (frameworks, prompts, prior artifacts). Use to load framework markdown as additional in-context guidance.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {"type": "string"}
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "write_artifact",
+      "description": "Write a text artifact into the agent run directory. Use to persist evaluation-report.md, framework-scores.json, research-citations.md, etc. Path is relative to evaluation-runs/<ts>/ — do not include '..'.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "Relative path inside the run directory (e.g. 'evaluation-report.md')"},
+          "content": {"type": "string"}
+        },
+        "required": ["name", "content"]
+      }
+    },
+    {
+      "name": "check_gpu",
+      "description": "Run nvidia-smi and parse compute capability / memory / driver. Use in Stage 1 to confirm the target hardware string.",
+      "parameters": {"type": "object", "properties": {}}
+    },
+    {
+      "name": "check_docker",
+      "description": "Verify Docker is reachable + list running containers. Use in Stage 3-4 to ensure deployment can proceed.",
+      "parameters": {"type": "object", "properties": {}}
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+name: Framework feedback / proposed improvement
+description: Suggest changes to one of the decision frameworks
+title: "[framework] "
+labels: ["framework"]
+body:
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Which framework
+      options:
+        - "01 — FP8 vs NVFP4 decision"
+        - "02 — New model selection"
+        - "03 — Inference research channels"
+        - "04 — New model evaluation channels"
+        - "05 — MTP speculative decoding"
+        - "how-to-use-these-frameworks"
+    validations:
+      required: true
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Type of change proposed
+      options:
+        - "Weight should change (a dimension is over/under-weighted)"
+        - "Threshold should change (the decision cutoff is wrong)"
+        - "Missing dimension (something important not scored)"
+        - "Outdated information (a fact has changed since publication)"
+        - "Clarification needed (rubric ambiguous)"
+        - "Other"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Cite case studies (yours or in this repo) and external sources that support the change
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed concrete change
+      description: What text would you change, and to what?
+    validations:
+      required: true

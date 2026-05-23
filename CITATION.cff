@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "spark-llm-deployment-evaluation"
+message: "If you use this evaluation methodology or agent toolkit in your work, please cite it as below."
+type: software
+authors:
+  - family-names: "wutonglab"
+    name-particle: "wutonglab"
+repository-code: "https://github.com/wutonglab/spark-llm-deployment-evaluation"
+abstract: >
+  A reusable methodology and agent toolkit for evaluating LLM deployment decisions
+  on DGX Spark and similar GB10/Blackwell-class hardware. Includes decision
+  frameworks for model selection, quantization choice (FP8 vs NVFP4), speculative
+  decoding, and a multi-provider LLM agent that walks users through evaluating
+  any model + hardware combination with optional benchmark validation.
+keywords:
+  - LLM
+  - inference
+  - DGX-Spark
+  - GB10
+  - quantization
+  - FP8
+  - NVFP4
+  - speculative-decoding
+  - MTP
+  - vLLM
+  - benchmarking
+  - decision-framework
+license: Apache-2.0

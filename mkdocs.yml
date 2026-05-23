@@ -1,0 +1,72 @@
+site_name: spark-llm-deployment-evaluation
+site_description: "LLM deployment evaluation methodology + agent toolkit for DGX Spark and Blackwell-class hardware"
+site_url: https://wutonglab.github.io/spark-llm-deployment-evaluation/
+repo_url: https://github.com/wutonglab/spark-llm-deployment-evaluation
+repo_name: wutonglab/spark-llm-deployment-evaluation
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+# Pre-build hook to copy frameworks/ and case-studies/ into docs/ so MkDocs can
+# render them as part of the site. See docs/hooks/copy_external.py.
+hooks:
+  - docs/hooks/copy_external.py
+
+nav:
+  - Home: index.md
+  - Methodology:
+    - Overview: methodology/index.md
+    - "01: FP8 vs NVFP4 decision": frameworks/01-fp8-vs-nvfp4-decision.md
+    - "02: New model selection": frameworks/02-new-model-selection.md
+    - "03: Inference research channels": frameworks/03-inference-research-channels.md
+    - "04: New model evaluation channels": frameworks/04-new-model-evaluation-channels.md
+    - "05: MTP speculative decoding": frameworks/05-mtp-speculative-decoding.md
+    - "How to use these frameworks": frameworks/how-to-use-these-frameworks.md
+  - Case Studies:
+    - Index: case-studies/index.md
+    - "Qwen3.6-35B-A3B on DGX Spark":
+        - Summary: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/00-summary.md
+        - Layer 0 — Model selection: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/01-applying-framework-02.md
+        - Layer 1 — Quantization: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/02-applying-framework-01.md
+        - Layer 2 — Speculative: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/03-applying-framework-05.md
+        - Benchmark results: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/04-benchmark-results.md
+        - Final decision: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/05-decision.md
+  - Hardware Portability: hardware-portability/porting-to-other-gpus.md
+  - Glossary: glossary.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/wutonglab/spark-llm-deployment-evaluation

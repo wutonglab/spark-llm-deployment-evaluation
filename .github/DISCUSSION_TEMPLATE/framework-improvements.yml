@@ -1,0 +1,22 @@
+title: "[framework] "
+labels: ["framework"]
+body:
+  - type: textarea
+    id: observation
+    attributes:
+      label: What did you observe
+      description: Which framework prediction was wrong, or what dimension feels off?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Cite case studies, external research, or your own measurements
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Proposed framework change
+      description: What weight / threshold / dimension would you change, and why?

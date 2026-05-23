@@ -1,0 +1,50 @@
+{"text": "Write a one-paragraph summary of how speculative decoding accelerates LLM inference."}
+{"text": "Explain in plain English what FP8 quantization does to a transformer's weights."}
+{"text": "List five practical differences between dense and mixture-of-experts language models."}
+{"text": "Describe what a CUDA kernel is, in two sentences."}
+{"text": "Compose a four-line poem about memory bandwidth limitations."}
+{"text": "What is the difference between an attention head and a feed-forward layer?"}
+{"text": "Define KV cache and explain why it matters for inference throughput."}
+{"text": "Give three reasons why batched inference outperforms one-request-at-a-time."}
+{"text": "Summarize the role of prefix caching in an LLM serving stack."}
+{"text": "Explain how tensor parallelism splits a transformer across multiple GPUs."}
+{"text": "What is the role of a draft model in speculative decoding?"}
+{"text": "Why is memory bandwidth often the bottleneck for LLM inference?"}
+{"text": "Describe one tradeoff between throughput and latency in LLM serving."}
+{"text": "What does 'token acceptance rate' mean in the context of speculative decoding?"}
+{"text": "Compare BF16 and FP8 representations for neural network weights."}
+{"text": "Explain how chunked prefill helps interleave new requests with running ones."}
+{"text": "What does a 'mixture of experts' router do at inference time?"}
+{"text": "List two scenarios where speculative decoding does NOT help."}
+{"text": "Why might disabling prefix caching be the right call for some workloads?"}
+{"text": "Describe in one paragraph what 'continuous batching' means in vLLM."}
+{"text": "Explain the difference between weight-only quantization and KV-cache quantization."}
+{"text": "What is the role of CUDA graphs in lowering inference latency?"}
+{"text": "Why is `nvidia-smi` insufficient for measuring inference throughput?"}
+{"text": "Describe one risk of running 4-bit quantization in production."}
+{"text": "Why are some LLM benchmarks contamination-prone, and how do leaderboards combat it?"}
+{"text": "What does 'sm_120' refer to in NVIDIA Blackwell tooling?"}
+{"text": "Explain why a 27B dense model is harder to serve than a 35B MoE with A3B."}
+{"text": "List three things that change when you swap an LLM's quantization format."}
+{"text": "Why do some speculative-decoding methods fail under aggressive quantization?"}
+{"text": "What does it mean for a benchmark to be 'memory-bandwidth bound'?"}
+{"text": "Explain how flashinfer differs from a default flash-attention backend."}
+{"text": "What information does the OpenAI-compatible `/v1/models` endpoint provide?"}
+{"text": "Describe what 'time to first token' (TTFT) measures and why it matters."}
+{"text": "What is the purpose of a `max-num-batched-tokens` setting in vLLM?"}
+{"text": "Why might a smaller speculative tree depth perform better than a larger one?"}
+{"text": "List two reasons why concurrent throughput exceeds single-request throughput."}
+{"text": "How does an MoE router decide which experts to activate?"}
+{"text": "Explain why 4-bit weight quantization is more aggressive than 8-bit."}
+{"text": "What is the purpose of a CUDA-graph warmup pass?"}
+{"text": "Describe the role of 'tool calling' parsers in serving frameworks."}
+{"text": "Why do some quantization formats need vendor-specific tensor cores?"}
+{"text": "Explain what 'block-scaled' quantization means."}
+{"text": "List three things that affect the 'compute-bound vs memory-bound' regime."}
+{"text": "What does it mean for an inference framework to be 'OpenAI-compatible'?"}
+{"text": "Describe one common failure mode of speculative decoding at high concurrency."}
+{"text": "Why are memory-mapped (mmap) model loads sometimes slower than direct reads?"}
+{"text": "Explain in one paragraph what `--gpu-memory-utilization` controls in vLLM."}
+{"text": "How does 'reasoning parser' differ from 'tool-call parser' in OpenAI-compatible servers?"}
+{"text": "List two reasons why a model might run faster on consumer Blackwell than on Hopper."}
+{"text": "Describe what kind of workload benefits most from a 256K context window."}

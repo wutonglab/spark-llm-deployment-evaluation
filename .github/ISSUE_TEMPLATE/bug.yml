@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a bug in the agent, benchmark scripts, or any code in this repo
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. **Do not include proprietary, internal, or NDA-bound information.** If you need to share private details, use SECURITY.md instead.
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: Which directory / file is involved? (e.g. `agent/`, `tools/benchmark/bench.py`)
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Steps to reproduce + observed behavior + expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        OS, Python version, vLLM version (if relevant), GPU model + SM (no internal hostnames please).
+      placeholder: |
+        OS: Ubuntu 24.04
+        Python: 3.12
+        vLLM: 0.17.1
+        GPU: GB10 (sm_121)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste relevant logs in a code block. **Redact any tokens / IPs / hostnames.**
+      render: shell

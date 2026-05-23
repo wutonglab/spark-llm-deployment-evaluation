@@ -1,0 +1,36 @@
+[book]
+title = "spark-llm-deployment-evaluation"
+description = "LLM deployment evaluation methodology + agent toolkit for DGX Spark and Blackwell-class hardware"
+authors = ["wutonglab"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+site-url = "/spark-llm-deployment-evaluation/"
+git-repository-url = "https://github.com/wutonglab/spark-llm-deployment-evaluation"
+git-repository-icon = "fab-github"
+edit-url-template = "https://github.com/wutonglab/spark-llm-deployment-evaluation/edit/main/{path}"
+default-theme = "light"
+preferred-dark-theme = "navy"
+no-section-label = false
+
+[output.html.print]
+enable = true
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 3

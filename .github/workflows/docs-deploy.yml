@@ -1,9 +1,16 @@
-name: Deploy MkDocs site
+name: Deploy mdBook site
 
 on:
   push:
     branches: [main]
-    paths: ["docs/**", "frameworks/**", "case-studies/**", "mkdocs.yml", "README.md"]
+    paths:
+      - "src/**"
+      - "frameworks/**"
+      - "case-studies/**"
+      - "docs/**"
+      - "book.toml"
+      - "scripts/sync-book-src.sh"
+      - "README.md"
   workflow_dispatch:
 
 permissions:
@@ -18,20 +25,22 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MDBOOK_VERSION: 0.5.3
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Install mdBook
+        uses: peaceiris/actions-mdbook@v2
         with:
-          python-version: "3.12"
-      - name: Install MkDocs Material
-        run: |
-          pip install mkdocs-material
-      - name: Build site
-        run: mkdocs build  # warnings allowed (links to code/data files outside docs/ are intentional)
+          mdbook-version: ${{ env.MDBOOK_VERSION }}
+      - name: Sync repo content into src/
+        run: bash scripts/sync-book-src.sh
+      - name: Build book
+        run: mdbook build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: book
 
   deploy:
     needs: build

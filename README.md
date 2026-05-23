@@ -58,7 +58,7 @@ Full case study under [`case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/`](case-st
 
 ## Not on DGX Spark?
 
-The frameworks are hardware-aware but not Spark-locked. Re-score the relevant dimensions for your GPU using [`docs/hardware-portability/porting-to-other-gpus.md`](docs/hardware-portability/porting-to-other-gpus.md). Notes for RTX PRO 6000 Blackwell, B200, and H100/H200 included.
+The frameworks are hardware-aware but not Spark-locked. Re-score the relevant dimensions for your GPU using [`src/hardware-portability/porting-to-other-gpus.md`](src/hardware-portability/porting-to-other-gpus.md). Notes for RTX PRO 6000 Blackwell, B200, and H100/H200 included.
 
 ## Contribute a Case Study
 
@@ -73,10 +73,12 @@ frameworks/      decision frameworks (the methodology)
 case-studies/    worked examples (validation that frameworks work)
 agent/           multi-provider evaluation agent (OpenAI + Anthropic)
 tools/           reusable deploy + benchmark tooling for any vLLM model
-docs/            MkDocs site source (rendered to GitHub Pages)
-scripts/        repo maintenance (sanitization lint etc.)
-tests/          pytest suite
+src/             mdBook source for the documentation site (auto-synced)
+scripts/         repo maintenance (sanitization lint, doc sync etc.)
+tests/           pytest suite
 ```
+
+Documentation site is built with [mdBook](https://rust-lang.github.io/mdBook/) — see [`book.toml`](book.toml). Run `scripts/sync-book-src.sh && mdbook build` locally to preview.
 
 ## Sanitization Policy
 

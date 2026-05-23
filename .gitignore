@@ -25,7 +25,6 @@ env/
 build/
 dist/
 *.egg
-site/                    # MkDocs build output
 .cache/
 
 # Agent run artifacts (may contain user tokens / hostnames)
@@ -48,7 +47,5 @@ benchmark/results/
 .DS_Store
 Thumbs.db
 
-# MkDocs hook-generated copies (built from frameworks/ and case-studies/)
-docs/frameworks/
-docs/case-studies/
-site/
+# mdBook build output
+book/

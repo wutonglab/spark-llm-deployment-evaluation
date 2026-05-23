@@ -1,0 +1,25 @@
+/* Force any inline image (incl. emoji rendered as SVG) to stay inline-sized. */
+.md-typeset img,
+.md-typeset svg,
+.md-typeset .twemoji,
+.md-typeset img.emoji {
+  max-height: 1.25em !important;
+  width: auto !important;
+  vertical-align: -0.15em !important;
+  display: inline-block;
+}
+
+/* Constrain emoji-font characters that some OS fonts render oversized. */
+.md-typeset {
+  font-variant-emoji: text;
+}
+
+/* Keep tables readable on small viewports. */
+.md-typeset table:not([class]) {
+  font-size: 0.85rem;
+}
+
+/* Trim default header icon padding that some themes inflate. */
+.md-header__title {
+  font-weight: 600;
+}

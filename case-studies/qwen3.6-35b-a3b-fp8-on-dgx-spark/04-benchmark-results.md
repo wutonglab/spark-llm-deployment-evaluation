@@ -25,7 +25,7 @@ Configuration env-templates for every variant are in [`reproduce/env-templates/`
 | `baseline` | FP8 | bf16 (default) | default | none | 16384 |
 | `with-kv-fp8` | FP8 | **fp8** | default | none | 16384 |
 | `with-flashinfer` | FP8 | fp8 | **flashinfer** | none | 16384 |
-| **`with-mtp1`** ⭐ | FP8 | fp8 | default | **MTP-1** | 16384 |
+| **`with-mtp1`** | FP8 | fp8 | default | **MTP-1** | 16384 |
 | `nvfp4-default` | NVFP4 (vendor) | fp8 | default | none | 16384 |
 | `with-32k-batched` | FP8 | fp8 | default | none | **32768** |
 
@@ -109,7 +109,7 @@ The CSV with all measurement rows is in [`data/baseline-results.csv`](data/basel
 ```bash
 # from repo root
 cd tools/benchmark
-bash run_variants.sh --all      # or --only with-mtp1, etc.
+bash run_variants.sh --all # or --only with-mtp1, etc.
 python analyze.py --against ../../case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/data/baseline-results.csv
 ```
 

@@ -47,3 +47,8 @@ benchmark/results/
 # OS
 .DS_Store
 Thumbs.db
+
+# MkDocs hook-generated copies (built from frameworks/ and case-studies/)
+docs/frameworks/
+docs/case-studies/
+site/

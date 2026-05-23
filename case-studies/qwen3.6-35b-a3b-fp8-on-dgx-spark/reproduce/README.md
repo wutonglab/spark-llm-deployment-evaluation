@@ -25,7 +25,7 @@ cp env-templates/with-mtp1.env .env
 # For the NVFP4 "naive" comparison:
 # cp env-templates/nvfp4-default.env .env
 
-$EDITOR .env   # set HF_TOKEN; adjust WORKSPACE / VLLM_PORT if needed
+$EDITOR .env # set HF_TOKEN; adjust WORKSPACE / VLLM_PORT if needed
 ```
 
 ## Step 2 — Launch
@@ -43,8 +43,8 @@ The script will:
 
 On success you'll see:
 ```
-Endpoint:  http://localhost:8000/v1
-Model id:  Qwen/Qwen3.6-35B-A3B-FP8
+Endpoint: http://localhost:8000/v1
+Model id: Qwen/Qwen3.6-35B-A3B-FP8
 ```
 
 ## Step 3 — Smoke test
@@ -52,12 +52,12 @@ Model id:  Qwen/Qwen3.6-35B-A3B-FP8
 ```bash
 curl http://localhost:${VLLM_PORT}/v1/models
 curl http://localhost:${VLLM_PORT}/v1/chat/completions \
-    -H "Content-Type: application/json" \
-    -d '{
-      "model": "Qwen/Qwen3.6-35B-A3B-FP8",
-      "messages": [{"role": "user", "content": "say hi"}],
-      "max_tokens": 32
-    }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "model": "Qwen/Qwen3.6-35B-A3B-FP8",
+ "messages": [{"role": "user", "content": "say hi"}],
+ "max_tokens": 32
+ }'
 ```
 
 ## Step 4 — Run the benchmark sweep
@@ -80,7 +80,7 @@ python analyze.py --against ../../case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/
 Stop the current container, switch the `.env`, re-launch:
 
 ```bash
-docker stop qwen36-fp8     # or qwen36-nvfp4 etc.
+docker stop qwen36-fp8 # or qwen36-nvfp4 etc.
 cp env-templates/<other-variant>.env .env
 bash launch.sh
 ```
@@ -101,12 +101,12 @@ bash launch.sh
 Instead of running the scripts manually, the [`agent/`](../../../agent/) script automates the entire flow:
 
 ```bash
-cd ../../../   # repo root
+cd ../../../ # repo root
 python agent/evaluate.py \
-  --model Qwen/Qwen3.6-35B-A3B-FP8 \
-  --target-hardware "DGX Spark / GB10 / 128GB / 273 GB/s LPDDR5X / sm_121" \
-  --business-scenario "general LLM API service" \
-  --provider openai
+ --model Qwen/Qwen3.6-35B-A3B-FP8 \
+ --target-hardware "DGX Spark / GB10 / 128GB / 273 GB/s LPDDR5X / sm_121" \
+ --business-scenario "general LLM API service" \
+ --provider openai
 ```
 
 The agent walks all 4 framework layers (selection / quantization / speculative / tuning), produces an evaluation report comparable to this case study, and exits 0 only if measured throughput matches the predictions within tolerance.

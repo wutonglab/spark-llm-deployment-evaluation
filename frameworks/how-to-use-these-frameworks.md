@@ -50,10 +50,10 @@ The [`agent/evaluate.py`](../agent/evaluate.py) script automates A→D end-to-en
 
 ```bash
 python agent/evaluate.py \
-  --model <hf-repo-id> \
-  --target-hardware "DGX Spark / GB10 / 128 GB / 273 GB/s LPDDR5X / sm_121" \
-  --business-scenario "your scenario description" \
-  --provider openai
+ --model <hf-repo-id> \
+ --target-hardware "DGX Spark / GB10 / 128 GB / 273 GB/s LPDDR5X / sm_121" \
+ --business-scenario "your scenario description" \
+ --provider openai
 ```
 
 The agent loads each framework's markdown as in-context guidance, performs channel research via web search + HTTP fetches, scores each framework, and (optionally, default on) runs the benchmark sweep to confirm predictions.

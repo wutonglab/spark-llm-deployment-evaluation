@@ -28,10 +28,10 @@ We welcome new cases — especially ones where the frameworks fail to predict th
 4. **Run measurements**, save raw data to `data/`
 5. **Write reproducible env templates + launcher** under `reproduce/`
 6. **Run the sanitization check locally**:
-   ```bash
-   bash scripts/check-no-internal.sh
-   ```
-   It must report zero hits.
+ ```bash
+ bash scripts/check-no-internal.sh
+ ```
+ It must report zero hits.
 7. **Open a PR** with the `case-study-submission` label
 
 We'll review for:

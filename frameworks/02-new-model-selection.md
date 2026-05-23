@@ -141,29 +141,29 @@ total = capability + business_fit + license + ecosystem + switching_cost + susta
 Walk these gates in order; any ❌ kills the candidate without needing the full score:
 
 1. **General capability**: LMArena / LiveBench / Open LLM ranking vs current?
-   - Clear lead → continue
-   - Flat or slight drop → ⚠️ only worth replacing if domain is strong
-   - Wholesale regression → ❌ drop
+ - Clear lead → continue
+ - Flat or slight drop → ⚠️ only worth replacing if domain is strong
+ - Wholesale regression → ❌ drop
 
 2. **Domain match**: business-critical benchmark (SWE-bench / MATH / Chinese / agent) clear lead?
-   - Yes → continue
-   - No → ⚠️ need other dimensions to compensate
+ - Yes → continue
+ - No → ⚠️ need other dimensions to compensate
 
 3. **Self-test**: 50+ business prompts A/B blind win-rate ≥ 50%?
-   - Yes → continue
-   - < 50% → ❌ drop (public benchmarks lie about your business)
+ - Yes → continue
+ - < 50% → ❌ drop (public benchmarks lie about your business)
 
 4. **License**: commercial-compliant + training-data traceable?
-   - Yes → continue
-   - No → ❌ drop (unless your business permits non-commercial)
+ - Yes → continue
+ - No → ❌ drop (unless your business permits non-commercial)
 
 5. **Ecosystem**: current vLLM / TRT-LLM version supports + quantized variant available?
-   - Yes → continue
-   - No → ⚠️ wait 1–2 months for ecosystem maturity
+ - Yes → continue
+ - No → ⚠️ wait 1–2 months for ecosystem maturity
 
 6. **Switching cost**: manageable (no hardware swap, no full prompt rewrite)?
-   - Yes → ready to score
-   - No → ⚠️ evaluate whether upside outweighs cost
+ - Yes → ready to score
+ - No → ⚠️ evaluate whether upside outweighs cost
 
 ---
 

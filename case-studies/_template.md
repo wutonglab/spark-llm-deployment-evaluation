@@ -6,7 +6,7 @@
 
 > **Question**: on `<hardware-description>`, should we adopt `<model-id>` for `<workload-description>`, and if so — which quantization, speculative method, and tuning?
 >
-> **Answer (one-line)**: ✏️ summarize your final decision here.
+> **Answer (one-line)**: summarize your final decision here.
 
 ## Hardware Profile (sanitized — no hostnames, IPs, business names)
 
@@ -23,16 +23,16 @@
 
 | Layer | Framework | Score | Decision |
 |---|---|---|---|
-| 0 — Model selection | [`02-new-model-selection`](../../frameworks/02-new-model-selection.md) | ✏️ X.XX / 1.00 | ✏️ adopt / wait / drop |
-| 1 — Quantization | [`01-fp8-vs-nvfp4-decision`](../../frameworks/01-fp8-vs-nvfp4-decision.md) | ✏️ X.XX / 1.00 | ✏️ FP8 / NVFP4 / other |
-| 2 — Speculative decoding | [`05-mtp-speculative-decoding`](../../frameworks/05-mtp-speculative-decoding.md) | n/a (decision table) | ✏️ method + n |
-| 3 — Engine tuning (A/B) | empirical | see `04-…md` | ✏️ summary |
+| 0 — Model selection | [`02-new-model-selection`](../../frameworks/02-new-model-selection.md) | X.XX / 1.00 | adopt / wait / drop |
+| 1 — Quantization | [`01-fp8-vs-nvfp4-decision`](../../frameworks/01-fp8-vs-nvfp4-decision.md) | X.XX / 1.00 | FP8 / NVFP4 / other |
+| 2 — Speculative decoding | [`05-mtp-speculative-decoding`](../../frameworks/05-mtp-speculative-decoding.md) | n/a (decision table) | method + n |
+| 3 — Engine tuning (A/B) | empirical | see `04-…md` | summary |
 
 Detailed score breakdowns are in the per-layer files (`01-…` to `05-…`).
 
 ## Final Production Configuration
 
-✏️ Replace this block with the docker/compose/launch command your case ends up using. Make sure every variable is documented in `reproduce/env-templates/`.
+ Replace this block with the docker/compose/launch command your case ends up using. Make sure every variable is documented in `reproduce/env-templates/`.
 
 ```bash
 docker run ... <your final config> ...
@@ -42,26 +42,26 @@ Reproducible scripts live in [`reproduce/`](reproduce/).
 
 ## Headline Measurements
 
-| Variant | Single-request output tok/s (✏️ at output length) | Concurrent aggregate tok/s (✏️ at concurrency, output length) |
+| Variant | Single-request output tok/s ( at output length) | Concurrent aggregate tok/s ( at concurrency, output length) |
 |---|---:|---:|
-| `baseline` | ✏️ | ✏️ |
-| `<your-chosen-variant>` ⭐ | ✏️ | ✏️ |
-| `<comparison variant>` | ✏️ | ✏️ |
+| `baseline` | | |
+| `<your-chosen-variant>` | | |
+| `<comparison variant>` | | |
 
 Detailed tables in [`04-benchmark-results.md`](04-benchmark-results.md). Raw CSV in [`data/baseline-results.csv`](data/baseline-results.csv).
 
 ## What This Case Validates / Challenges About the Frameworks
 
-✏️ Did the frameworks predict the right answer? Did any dimension surprise you?
-- Framework 01: ✏️ matched / mis-predicted because …
-- Framework 02: ✏️
-- Framework 05: ✏️
+ Did the frameworks predict the right answer? Did any dimension surprise you?
+- Framework 01: matched / mis-predicted because …
+- Framework 02: 
+- Framework 05: 
 
 If a framework's prediction was wrong, open a Discussion under `framework-improvements`.
 
 ## Open Questions
 
-✏️ Anything you didn't have time / hardware to measure that follow-up cases could cover.
+ Anything you didn't have time / hardware to measure that follow-up cases could cover.
 
 ## How to Reproduce This Case
 

@@ -50,6 +50,9 @@ theme:
 plugins:
   - search
 
+extra_css:
+  - stylesheets/extra.css
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -74,9 +77,8 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # pymdownx.emoji intentionally disabled — we don't want :shortcode: turned into
+  # large SVG images; unicode emoji in markdown render as plain text characters.
   - toc:
       permalink: true
       toc_depth: 3
@@ -95,7 +97,7 @@ nav:
     - "05 — MTP speculative decoding": frameworks/05-mtp-speculative-decoding.md
     - "How to use these frameworks": frameworks/how-to-use-these-frameworks.md
   - Case Studies:
-    - Index: case-studies/index.md
+    - Index: case-studies/README.md
     - "Qwen3.6-35B-A3B on DGX Spark":
         - Summary: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/00-summary.md
         - "Layer 0 — Model selection": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/01-applying-framework-02.md

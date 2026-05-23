@@ -13,27 +13,27 @@
 
 ```bash
 docker run -d --name qwen36-fp8 \
-  --runtime=nvidia --gpus all \
-  -p 8000:8000 \
-  -v ${WORKSPACE}/models/Qwen3.6-35B-A3B-FP8:/model \
-  --ipc=host --restart unless-stopped \
-  -e VLLM_MARLIN_USE_ATOMIC_ADD=1 \
-  --entrypoint python3 \
-  nvcr.io/nvidia/vllm:26.03.post1-py3 \
-  -m vllm.entrypoints.openai.api_server \
-  --model /model \
-  --served-model-name Qwen/Qwen3.6-35B-A3B-FP8 \
-  --host 0.0.0.0 --port 8000 \
-  --tensor-parallel-size 1 \
-  --max-model-len 262144 \
-  --max-num-batched-tokens 16384 \
-  --gpu-memory-utilization 0.85 \
-  --kv-cache-dtype fp8 \
-  --reasoning-parser qwen3 \
-  --enable-auto-tool-choice --tool-call-parser qwen3_xml \
-  --enable-prefix-caching \
-  --speculative-config '{"method":"mtp","num_speculative_tokens":1}' \
-  --dtype auto
+ --runtime=nvidia --gpus all \
+ -p 8000:8000 \
+ -v ${WORKSPACE}/models/Qwen3.6-35B-A3B-FP8:/model \
+ --ipc=host --restart unless-stopped \
+ -e VLLM_MARLIN_USE_ATOMIC_ADD=1 \
+ --entrypoint python3 \
+ nvcr.io/nvidia/vllm:26.03.post1-py3 \
+ -m vllm.entrypoints.openai.api_server \
+ --model /model \
+ --served-model-name Qwen/Qwen3.6-35B-A3B-FP8 \
+ --host 0.0.0.0 --port 8000 \
+ --tensor-parallel-size 1 \
+ --max-model-len 262144 \
+ --max-num-batched-tokens 16384 \
+ --gpu-memory-utilization 0.85 \
+ --kv-cache-dtype fp8 \
+ --reasoning-parser qwen3 \
+ --enable-auto-tool-choice --tool-call-parser qwen3_xml \
+ --enable-prefix-caching \
+ --speculative-config '{"method":"mtp","num_speculative_tokens":1}' \
+ --dtype auto
 ```
 
 Reproduce with: see [`reproduce/`](reproduce/) directory.

@@ -32,26 +32,26 @@ Each score is justified in detail in the per-layer files (`01-` through `05-`).
 
 ```bash
 docker run -d --name qwen36-fp8 \
-  --runtime=nvidia --gpus all \
-  -p 8000:8000 \
-  -v ${WORKSPACE}/models/Qwen3.6-35B-A3B-FP8:/model \
-  --ipc=host --restart unless-stopped \
-  -e VLLM_MARLIN_USE_ATOMIC_ADD=1 \
-  --entrypoint python3 \
-  nvcr.io/nvidia/vllm:26.03.post1-py3 \
-  -m vllm.entrypoints.openai.api_server \
-  --model /model \
-  --served-model-name Qwen/Qwen3.6-35B-A3B-FP8 \
-  --host 0.0.0.0 --port 8000 \
-  --tensor-parallel-size 1 \
-  --max-model-len 262144 \
-  --max-num-batched-tokens 16384 \
-  --gpu-memory-utilization 0.85 \
-  --kv-cache-dtype fp8 \
-  --reasoning-parser qwen3 \
-  --enable-auto-tool-choice --tool-call-parser qwen3_xml \
-  --speculative-config '{"method":"mtp","num_speculative_tokens":1}' \
-  --dtype auto
+ --runtime=nvidia --gpus all \
+ -p 8000:8000 \
+ -v ${WORKSPACE}/models/Qwen3.6-35B-A3B-FP8:/model \
+ --ipc=host --restart unless-stopped \
+ -e VLLM_MARLIN_USE_ATOMIC_ADD=1 \
+ --entrypoint python3 \
+ nvcr.io/nvidia/vllm:26.03.post1-py3 \
+ -m vllm.entrypoints.openai.api_server \
+ --model /model \
+ --served-model-name Qwen/Qwen3.6-35B-A3B-FP8 \
+ --host 0.0.0.0 --port 8000 \
+ --tensor-parallel-size 1 \
+ --max-model-len 262144 \
+ --max-num-batched-tokens 16384 \
+ --gpu-memory-utilization 0.85 \
+ --kv-cache-dtype fp8 \
+ --reasoning-parser qwen3 \
+ --enable-auto-tool-choice --tool-call-parser qwen3_xml \
+ --speculative-config '{"method":"mtp","num_speculative_tokens":1}' \
+ --dtype auto
 ```
 
 The full reproducible launcher lives in [`reproduce/`](reproduce/).
@@ -63,7 +63,7 @@ The full reproducible launcher lives in [`reproduce/`](reproduce/).
 | `baseline` (FP8, no MTP, no kv-fp8) | ~53 | ~190 |
 | `with-kv-fp8` | ~52 | ~164 |
 | `with-flashinfer` | ~52 | ~166 |
-| **`with-mtp1`** ⭐ | **~61** | **~234** |
+| **`with-mtp1`** | **~61** | **~234** |
 | `nvfp4-default` (vendor NVFP4 image) | ~12 | ~55 |
 
 Detailed tables (including TTFT, ITL, multiple output lengths, multiple concurrency levels) are in [`04-benchmark-results.md`](04-benchmark-results.md). Raw CSV in [`data/baseline-results.csv`](data/baseline-results.csv).

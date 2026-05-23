@@ -111,31 +111,31 @@ total = hardware + bandwidth + software + architecture + workload − op_cost
 ## Operational Checklist (walk in order; any ❌ kills the candidate)
 
 1. **Hardware**: target SM = sm_100a / sm_103a?
-   - Yes → likely worth it; continue
-   - sm_120 / sm_121 → software stack is the deciding factor; continue
-   - sm_89 or older → ❌ stay on FP8
+ - Yes → likely worth it; continue
+ - sm_120 / sm_121 → software stack is the deciding factor; continue
+ - sm_89 or older → ❌ stay on FP8
 
 2. **Bandwidth**: ≥ 1 TB/s?
-   - Yes → continue
-   - < 500 GB/s (e.g. DGX Spark) → ⚠️ likely not worth it
+ - Yes → continue
+ - < 500 GB/s (e.g. DGX Spark) → ⚠️ likely not worth it
 
 3. **Software**: chosen inference framework has an official production image on target SM that runs the NVFP4 fast path?
-   - Yes → OK
-   - Only patch forks available → assess stability carefully
-   - Neither → ❌ stay on FP8
+ - Yes → OK
+ - Only patch forks available → assess stability carefully
+ - Neither → ❌ stay on FP8
 
 4. **Model**: Dense ≥ 30B with Mamba/linear-attention < 30%?
-   - Yes → strong gain
-   - MoE small-activation + heavy Mamba → weak; proceed with caution
-   - < 10B → ❌ usually not worth it
+ - Yes → strong gain
+ - MoE small-activation + heavy Mamba → weak; proceed with caution
+ - < 10B → ❌ usually not worth it
 
 5. **Workload**: low-concurrency single-request dominant?
-   - Yes → maximal gain
-   - High concurrency / high prefix-cache hit → small gain
+ - Yes → maximal gain
+ - High concurrency / high prefix-cache hit → small gain
 
 6. **Accuracy**: business can tolerate 4-bit quantization error?
-   - Yes + independent eval done → proceed
-   - No / no eval → ❌ stay on FP8 + run an eval first
+ - Yes + independent eval done → proceed
+ - No / no eval → ❌ stay on FP8 + run an eval first
 
 ---
 

@@ -1,10 +1,63 @@
-/* ---------------------------------------------------------------------------
- * Defensive CSS to keep the site readable even when Material's webfont icons
- * fail to load (common in restricted networks). All inline images, SVGs, and
- * pseudo-element icons are clamped so nothing renders oversized.
- * --------------------------------------------------------------------------- */
+/* ===========================================================================
+ * GLOBAL SVG / icon clamp.
+ *
+ * Material's header logo, nav chevrons, search icon, and "edit on GitHub"
+ * SVGs are NOT inside .md-typeset. When the icon webfont can't load (e.g.
+ * networks where Google CDN is unreachable), or when CSS specificity wars
+ * with the theme's own rules, these SVGs render at their intrinsic huge
+ * viewBox (we've seen them fill the entire viewport).
+ *
+ * Cap EVERY svg in the document to a sane inline size. Mermaid diagrams or
+ * intentional figure SVGs in markdown override this with their own .mermaid
+ * or img wrapper selectors.
+ * =========================================================================== */
 
-/* Any inline image / svg / emoji image stays inline-sized */
+svg {
+  max-height: 1.5em !important;
+  max-width: 1.5em !important;
+  width: auto;
+  height: auto;
+}
+
+/* Header logo specifically: hide it altogether. We have a text title; the
+ * logo SVG is decorative noise even when sized correctly. */
+.md-header__button.md-logo,
+.md-header__button.md-logo svg,
+.md-header__button.md-logo img {
+  display: none !important;
+}
+
+/* Hamburger menu, search button, color-mode toggle — clamp these in case the
+ * webfont fails and they fall back to giant glyphs. */
+.md-header__button,
+.md-header__option,
+.md-search__icon,
+.md-source__icon,
+.md-clipboard {
+  max-height: 1.5em !important;
+  max-width: 2em !important;
+  overflow: hidden;
+}
+
+.md-header__button svg,
+.md-header__option svg,
+.md-search__icon svg,
+.md-source__icon svg,
+.md-clipboard svg {
+  height: 1em !important;
+  width: 1em !important;
+}
+
+/* Nav chevrons and bullets */
+.md-nav__icon,
+.md-nav__link svg,
+.md-tabs__link svg {
+  width: 1em !important;
+  height: 1em !important;
+}
+
+/* Inside .md-typeset (the markdown content area): same clamp + nicer
+ * alignment for inline emoji/images */
 .md-typeset img,
 .md-typeset svg,
 .md-typeset .twemoji,
@@ -15,49 +68,33 @@
   display: inline-block;
 }
 
-/* If Material's icon webfont fails to load, the placeholder ::before glyph in
- * admonitions / nav / TOC can balloon. Cap their size. */
-.md-typeset .md-icon::before,
-.md-typeset [class*="md-icon"]::before,
-.md-nav__icon,
-.md-icon {
+/* Admonition icons sometimes balloon when the icon webfont 404s */
+.md-typeset .admonition-title::before,
+.md-typeset summary::before {
+  width: 1em !important;
+  height: 1em !important;
   font-size: 1em !important;
-  line-height: 1 !important;
-  width: 1em;
-  height: 1em;
 }
 
-/* Heading permalink (.headerlink) only appears on hover; belt-and-suspenders
- * keep it small even on touch devices that show :hover state. */
-.md-typeset .headerlink {
-  font-size: 0.85em !important;
-  margin-left: 0.25em;
-  opacity: 0.4;
+/* Heading permalink — hide entirely (it's only useful with the icon webfont) */
+.md-typeset .headerlink,
+.md-typeset h1 .headerlink::before,
+.md-typeset h2 .headerlink::before,
+.md-typeset h3 .headerlink::before {
+  display: none !important;
 }
 
-/* Make tables more readable on narrow viewports */
+/* Table tightening for narrow viewports */
 .md-typeset table:not([class]) {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
-/* Header weight without webfont fallback */
 .md-header__title {
   font-weight: 600;
 }
 
-/* Force emoji characters to use text-style rendering (smaller, monochrome)
- * instead of color-emoji fonts that some platforms render at ~1.5em */
+/* Force text-style emoji rendering (smaller, system) instead of color emoji
+ * that some platforms render at ~1.5em */
 .md-typeset {
   font-variant-emoji: text;
-}
-
-/* Hide the pilcrow / link symbol that some Material versions inject next to
- * headings even with toc.permalink disabled */
-.md-typeset h1 .headerlink::before,
-.md-typeset h2 .headerlink::before,
-.md-typeset h3 .headerlink::before,
-.md-typeset h4 .headerlink::before,
-.md-typeset h5 .headerlink::before,
-.md-typeset h6 .headerlink::before {
-  content: "" !important;
 }

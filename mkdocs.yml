@@ -9,38 +9,78 @@ theme:
   name: material
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
+    - navigation.indexes
     - navigation.top
+    - navigation.footer
+    - navigation.path
     - search.suggest
     - search.highlight
+    - search.share
     - content.code.copy
     - content.code.annotate
     - content.action.edit
+    - content.action.view
+    - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+plugins:
+  - search
 
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - abbr
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
-  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
+      toc_depth: 3
 
-# Pre-build hook to copy frameworks/ and case-studies/ into docs/ so MkDocs can
-# render them as part of the site. See docs/hooks/copy_external.py.
 hooks:
   - docs/hooks/copy_external.py
 
@@ -48,25 +88,27 @@ nav:
   - Home: index.md
   - Methodology:
     - Overview: methodology/index.md
-    - "01: FP8 vs NVFP4 decision": frameworks/01-fp8-vs-nvfp4-decision.md
-    - "02: New model selection": frameworks/02-new-model-selection.md
-    - "03: Inference research channels": frameworks/03-inference-research-channels.md
-    - "04: New model evaluation channels": frameworks/04-new-model-evaluation-channels.md
-    - "05: MTP speculative decoding": frameworks/05-mtp-speculative-decoding.md
+    - "01 — FP8 vs NVFP4 decision": frameworks/01-fp8-vs-nvfp4-decision.md
+    - "02 — New model selection": frameworks/02-new-model-selection.md
+    - "03 — Inference research channels": frameworks/03-inference-research-channels.md
+    - "04 — New model evaluation channels": frameworks/04-new-model-evaluation-channels.md
+    - "05 — MTP speculative decoding": frameworks/05-mtp-speculative-decoding.md
     - "How to use these frameworks": frameworks/how-to-use-these-frameworks.md
   - Case Studies:
     - Index: case-studies/index.md
     - "Qwen3.6-35B-A3B on DGX Spark":
         - Summary: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/00-summary.md
-        - Layer 0 — Model selection: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/01-applying-framework-02.md
-        - Layer 1 — Quantization: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/02-applying-framework-01.md
-        - Layer 2 — Speculative: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/03-applying-framework-05.md
-        - Benchmark results: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/04-benchmark-results.md
-        - Final decision: case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/05-decision.md
+        - "Layer 0 — Model selection": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/01-applying-framework-02.md
+        - "Layer 1 — Quantization": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/02-applying-framework-01.md
+        - "Layer 2 — Speculative": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/03-applying-framework-05.md
+        - "Benchmark results": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/04-benchmark-results.md
+        - "Final decision": case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/05-decision.md
   - Hardware Portability: hardware-portability/porting-to-other-gpus.md
   - Glossary: glossary.md
 
 extra:
+  generator: false
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/wutonglab/spark-llm-deployment-evaluation
+      name: GitHub

@@ -1,0 +1,29 @@
+variant,concurrency,output_length,output_tokens_per_second,notes
+nvfp4-default,1,1024,2.2,RedHatAI NVFP4 build with --enforce-eager
+baseline,1,256,38.52,FP8 + KV-FP8 no MTP
+baseline,1,512,50.04,
+baseline,1,1024,56.16,
+baseline,1,2048,56.25,
+with-mtp1,1,256,50.70,Spark final config replicated on Thor
+with-mtp1,1,512,52.31,
+with-mtp1,1,1024,56.77,
+with-mtp1,1,2048,66.69,
+with-mtp1,4,1024,138.43,aggregate
+with-mtp2,1,256,50.88,
+with-mtp2,1,512,57.79,
+with-mtp2,1,1024,57.54,
+with-mtp2,1,2048,58.55,
+with-mtp2,4,1024,126.15,aggregate; -9% vs MTP-1 at c=4
+thor-big-concurrency,1,256,62.32,max-num-seqs=32 batched=32768 MTP-1
+thor-big-concurrency,1,512,65.85,
+thor-big-concurrency,1,1024,65.11,
+thor-big-concurrency,1,2048,65.37,
+thor-big-concurrency,4,1024,135.81,aggregate
+thor-big-concurrency,8,512,222.73,aggregate
+thor-tuned,1,256,54.06,3-run median; max-num-seqs=64 batched=32768 MTP-1 ⭐ chosen production config
+thor-tuned,1,512,65.94,3-run median
+thor-tuned,1,1024,66.70,3-run median
+thor-tuned,1,2048,66.83,3-run median
+thor-tuned,4,1024,152.19,3-run median aggregate
+thor-tuned,8,512,233.55,3-run median aggregate
+thor-tuned,16,512,303.18,3-run median aggregate

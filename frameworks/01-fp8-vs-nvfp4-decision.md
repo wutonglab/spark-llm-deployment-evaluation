@@ -164,7 +164,7 @@ total = hardware + bandwidth + software + architecture + workload − op_cost
 | DGX Spark + a Coder-class MoE 80B FP8 model | ~0.40 | ⚠️ side-by-side test |
 | **DGX Spark + Qwen3.6-35B-A3B MoE+Mamba (this case)** | **0.21** | ❌ stay on FP8 |
 | A100 + Llama-3 7B Dense | ~0.15 | ❌ stay on FP8 (compute-bound + no FP4 silicon) |
-| Jetson Thor sm_110 + any model | ~0.10 | ❌ stay on FP8 (hardware + bandwidth + software all weak) |
+| Jetson Thor sm_110 + any model | ~0.10 | ❌ stay on FP8 (hardware + bandwidth + software all weak; **empirically confirmed** in [`case-studies/qwen3.6-35b-a3b-fp8-on-jetson-thor/`](../case-studies/qwen3.6-35b-a3b-fp8-on-jetson-thor/) — NVFP4 measured **30× slower** than FP8 on the same hardware) |
 
 ---
 

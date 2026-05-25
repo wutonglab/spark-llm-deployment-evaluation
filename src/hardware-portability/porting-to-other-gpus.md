@@ -60,9 +60,10 @@ The agent walks all four layers and produces a fresh evaluation report.
 
 ### NVIDIA Jetson Thor (sm_110)
 
-- Framework 01 hardware score: **0** (no native FP4 tensor cores)
-- Framework 01 bandwidth score: low (depends on the platform variant)
-- Most likely outcome: FP8 (or BF16) only; speculative decoding still applies if the model ships an MTP head
+- Framework 01 hardware score: **0** (no native FP4 tensor cores — empirically confirmed)
+- Framework 01 bandwidth score: ~0.55 (Developer Kit class: 128 GB LPDDR5X, ~273 GB/s)
+- **Confirmed outcome** (case study: [`Qwen3.6-35B-A3B-FP8 on Jetson Thor`](https://github.com/wutonglab/spark-llm-deployment-evaluation/blob/main/case-studies/qwen3.6-35b-a3b-fp8-on-jetson-thor/)): FP8 + MTP-1 reaches ~67 tok/s single-stream and ~303 tok/s aggregate at c=16, while the NVFP4 build of the same model on the same hardware ran at 2.2 tok/s — a **30× measured slowdown**, the strongest framework-validating signal in the repo so far.
+- Notes specific to Thor (not portable from Spark): use `vllm/vllm-openai:nightly-aarch64` (NGC NV image is x86_64-only); `--gpu-memory-utilization 0.85` OOMs (unified-memory `Free` after boot is ~100 GB, use 0.75 + `drop_caches`); `--max-num-batched-tokens=32768` and `--max-num-seqs=64` outperform Spark's `16384 / 8` by 15-26% on single-stream; one user-space `pip install pytest` workaround inside the container is required for MTP head registration.
 
 ### NVIDIA H100 / H200 (sm_90, Hopper)
 

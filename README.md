@@ -46,7 +46,9 @@ Output lands in `evaluation-runs/<timestamp>/evaluation-report.md`.
 | 05 | [MTP speculative decoding notes](frameworks/05-mtp-speculative-decoding.md) | When MTP-1 beats EAGLE / DFlash / no-spec on Spark-class hardware |
 | — | [How to use these frameworks together](frameworks/how-to-use-these-frameworks.md) | Calling order + integration with the agent |
 
-## Worked Example: Qwen3.6-35B-A3B-FP8 on DGX Spark
+## Worked Examples
+
+### Qwen3.6-35B-A3B-FP8 on DGX Spark (`sm_121`)
 
 Full case study under [`case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/`](case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/):
 
@@ -55,6 +57,16 @@ Full case study under [`case-studies/qwen3.6-35b-a3b-fp8-on-dgx-spark/`](case-st
 - Framework 05 → MTP-1 (FP8-compatible, ~90% acceptance)
 - Benchmark across 6 variants confirms the prediction
 - **Final config**: FP8 + MTP-1 — measured ~61 tok/s single-request vs ~12 tok/s for NVFP4 in the same software stack
+
+### Qwen3.6-35B-A3B-FP8 on NVIDIA Jetson Thor (`sm_110`)
+
+Full case study under [`case-studies/qwen3.6-35b-a3b-fp8-on-jetson-thor/`](case-studies/qwen3.6-35b-a3b-fp8-on-jetson-thor/):
+
+- Framework 02 score = **0.78** → adopt (carries from Spark; only ecosystem dim shifts slightly for `aarch64`)
+- Framework 01 score = **~0.10** → strongly FP8 (`sm_110` has **no native FP4 silicon**, hardware-support dim = 0)
+- Framework 05 → MTP-1 (MTP-2 measured −9% at c=4, mirroring the Spark direction)
+- **Final config**: FP8 + MTP-1 + `--max-num-batched-tokens=32768` + `--max-num-seqs=64` — measured **67 tok/s single-stream / 303 tok/s aggregate @ c=16**, and **30× faster than the NVFP4 build** on the same hardware (largest framework-validating signal in the repo)
+- Validates one Spark-portability caveat: the engine-tuning A/B step (Spark's `16384 / 8` for batched-tokens / num-seqs) does **not** transfer to Thor
 
 ## Not on DGX Spark?
 
